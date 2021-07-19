@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229993986878",
+    "project_id": "bloctodo-ac007",
+    "storage_bucket": "bloctodo-ac007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229993986878:android:fa0ed3f270d35548bb8a6f",
+        "android_client_info": {
+          "package_name": "com.skgshalini.bloc_todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229993986878-ii567trsrv1k9hb8fanp3bdecm30qavs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ivZE9bswjJEnWI5MYNE9Ohn7zNOk2tQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229993986878-ii567trsrv1k9hb8fanp3bdecm30qavs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
