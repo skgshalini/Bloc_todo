@@ -21,7 +21,7 @@ class _TrashState extends State<Trash> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: BlocBuilder<NoteBloc, NoteStates>(
+    return BlocBuilder<NoteBloc, NoteStates>(
       builder: (context, state) {
         if (state is LoadingState) {
           return Center(
@@ -60,6 +60,6 @@ class _TrashState extends State<Trash> {
           return Container();
         }
       },
-    ));
+    );
   }
 }

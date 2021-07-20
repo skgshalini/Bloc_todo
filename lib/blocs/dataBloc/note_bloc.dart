@@ -24,7 +24,9 @@ class NoteBloc extends Bloc<NoteEvents, NoteStates> {
     }
     else if (event is AddEvent) {
       await repo.addNote(NoteModel(title: event.title, description: event.description, id: event.id, trash: event.trash));
-      yield AddState();
+      yield LoadingState();
+      var anotes = await repo.getNotes();
+      yield AddState(anotes: anotes);
     } else if (event is DelEvent) {
       await repo.delNote(event.id);
       yield LoadingState();

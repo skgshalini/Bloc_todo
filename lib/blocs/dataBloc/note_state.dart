@@ -6,7 +6,10 @@ class InitState extends NoteStates {}
 
 class LoadingState extends NoteStates {}
 
-class AddState extends NoteStates {}
+class AddState extends NoteStates {
+  List<NoteModel> anotes;
+  AddState({this.anotes});
+}
 class DelState extends NoteStates {
   List<NoteModel> dnotes;
   DelState({this.dnotes});

@@ -2,8 +2,9 @@ import 'package:bloc_todo/blocs/dataBloc/note_bloc.dart';
 import 'package:bloc_todo/blocs/dataBloc/note_event.dart';
 import 'package:bloc_todo/blocs/dataBloc/note_state.dart';
 import 'package:bloc_todo/blocs/navcubit/navigation_cubit.dart';
-import 'package:bloc_todo/components/homeNav.dart';
+import 'package:bloc_todo/components/home.dart';
 import 'package:bloc_todo/components/popupcard.dart';
+import 'package:bloc_todo/components/trash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +21,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  void initState() {
-    BlocProvider.of<NoteBloc>(context).add(GetAllEvent());
-    super.initState();
-  }
+  // void initState() {
+  //   BlocProvider.of<NoteBloc>(context).add(GetAllEvent());
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +35,18 @@ class _HomeState extends State<Home> {
           listener: (context, state) {
             if (state is AddState) {
               Navigator.pop(addPageContext);
-              BlocProvider.of<NoteBloc>(context).add(GetAllEvent());
-              _showSnackbar(context);
+           //  BlocProvider.of<NoteBloc>(context).add(GetAllEvent());
+             _showSnackbar(context);
             }
           },
-          child: HomeNav(),
+          child: BlocBuilder<NavigationCubit, int>(
+           builder: (context, count) {
+             if(count==0)
+             return HomeNav();
+             return Trash();
+
+          }
+        ),
         ),
         floatingActionButton: BlocBuilder<NavigationCubit, int>(
           builder: (context, count) {
@@ -63,7 +71,7 @@ class _HomeState extends State<Home> {
           },
         ),
         bottomNavigationBar:
-            BlocBuilder<NavigationCubit, int>(builder: (context, count) {
+        BlocBuilder<NavigationCubit, int>(builder: (context, count) {
           return new BottomNavigationBar(
             currentIndex: count,
             onTap: (int index) {
