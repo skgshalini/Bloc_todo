@@ -3,14 +3,18 @@ class NoteModel {
   String description;
   String id;
   bool trash;
-
-  NoteModel({this.title, this.description, this.id,this.trash});
+  String url;
+  int offlineId;
+  NoteModel({this.title, this.description, this.id,this.trash,this.url});
 
   toMap() => {
     "title" : title,
     "description" : description,
     "id" : id,
     "trash" : trash,
+    "url" : url,
+    "offlineId": offlineId,
+    
   };
 
 
@@ -18,6 +22,9 @@ class NoteModel {
         title = map["title"],
         description = map["description"],
         id = map["id"],
-        trash = map["trash"];
+        trash = map["trash"],
+        offlineId = map["offlineId"],
+        url = map["url"];
+
 
 }

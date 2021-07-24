@@ -26,6 +26,8 @@ dependencies:
   cloud_firestore: ^2.4.0
   flutter_bloc: ^7.0.1
   firebase_core: any
+  video_player: ^2.1.10
+  sqflite: any
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,3 +1,5 @@
+import 'package:bloc_todo/data/data_model.dart';
+
 abstract class NoteEvents {}
 
 class AddEvent extends NoteEvents {
@@ -5,13 +7,15 @@ class AddEvent extends NoteEvents {
   String description;
   String id;
   bool trash;
-  AddEvent({this.title, this.description, this.id,this.trash});
+  String url;
+
+  AddEvent({this.title, this.description, this.id,this.trash,this.url});
 }
 
 class GetAllEvent extends NoteEvents {}
 class GetAllTrashEvent extends NoteEvents {}
 
 class DelEvent extends NoteEvents {
-  String id;
-  DelEvent({this.id});
+ NoteModel note;
+  DelEvent({this.note});
 }
