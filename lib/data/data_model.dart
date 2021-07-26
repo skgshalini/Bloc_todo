@@ -5,13 +5,13 @@ class NoteModel {
   bool trash;
   String url;
   int offlineId;
-  NoteModel({this.title, this.description, this.id,this.trash,this.url});
+  NoteModel({this.title, this.description, this.id,this.trash,this.url,this.offlineId});
 
   toMap() => {
     "title" : title,
     "description" : description,
     "id" : id,
-    "trash" : trash,
+    "trash" : trash?1:0,
     "url" : url,
     "offlineId": offlineId,
     
@@ -22,9 +22,10 @@ class NoteModel {
         title = map["title"],
         description = map["description"],
         id = map["id"],
-        trash = map["trash"],
+        trash = map["trash"]==1?true:false,
         offlineId = map["offlineId"],
         url = map["url"];
+
 
 
 }

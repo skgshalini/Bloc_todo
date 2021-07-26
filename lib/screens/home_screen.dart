@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_todo/blocs/dataBloc/note_bloc.dart';
 import 'package:bloc_todo/blocs/dataBloc/note_event.dart';
 import 'package:bloc_todo/blocs/dataBloc/note_state.dart';
-import 'package:bloc_todo/blocs/internetBloc/internet_cubit.dart';
 import 'package:bloc_todo/blocs/navcubit/navigation_cubit.dart';
 import 'package:bloc_todo/components/home.dart';
 import 'package:bloc_todo/components/popupcard.dart';
@@ -14,8 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'add_screen.dart';
 import '../utility/hero_dialog_route.dart';
-import 'offline_home.dart';
-import 'offline_trash.dart';
+
 
 var addPageContext;
 
@@ -26,23 +24,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-    @override
-    void initState()  {
-      _checkInternetConnection();
-      super.initState();
-    }
-    Future<void> _checkInternetConnection() async {
-      try {
-        final response = await InternetAddress.lookup('www.kindacode.com');
-        if (response.isNotEmpty) {
-          BlocProvider.of<InternetCubit>(context).check(1);
-        }
-      } on SocketException catch (err) {
-        BlocProvider.of<InternetCubit>(context).check(0);
-        print(err);
-      }
-    }
     @override
     Widget build(BuildContext context) {
       return SafeArea(
@@ -59,29 +40,13 @@ class _HomeState extends State<Home> {
             child: BlocBuilder<NavigationCubit, int>(
                 builder: (context, count) {
                   if (count == 0)
-                    {return BlocBuilder<InternetCubit, int>(
-                  builder: (context, val) {
-                    if(val==1)
                     return HomeNav();
-                    return OfflineHome();
-
-                  });}else {
-                    return BlocBuilder<InternetCubit, int>(
-                        builder: (context, val) {
-                          if(val==1)
-                            return Trash();
-                          return OfflineTrash();
-
-                        });
                     return Trash();
                   }
-                }
             ),
           ),
-          floatingActionButton:BlocBuilder<InternetCubit, int>(
-      builder: (context, val) {
-        if (val == 1) {
-          return BlocBuilder<NavigationCubit, int>(
+          floatingActionButton:
+           BlocBuilder<NavigationCubit, int>(
             builder: (context, count) {
               bool vis;
               if (count == 0) {
@@ -103,12 +68,8 @@ class _HomeState extends State<Home> {
                 ),
               );
             },
-          );
-        }
-        return Visibility(visible: false,
-            child: FloatingActionButton(onPressed: (){}));
-      }
-        ),
+          ),
+
           bottomNavigationBar:
           BlocBuilder<NavigationCubit, int>(builder: (context, count) {
             return new BottomNavigationBar(
