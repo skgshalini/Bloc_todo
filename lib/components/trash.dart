@@ -5,7 +5,6 @@ import 'package:bloc_todo/components/popupcard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../utility/hero_dialog_route.dart';
 
 class Trash extends StatefulWidget {

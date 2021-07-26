@@ -9,13 +9,14 @@ class AddEvent extends NoteEvents {
   bool trash;
   String url;
 
-  AddEvent({this.title, this.description, this.id,this.trash,this.url});
+  AddEvent({this.title, this.description, this.id, this.trash, this.url});
 }
 
 class GetAllEvent extends NoteEvents {}
+
 class GetAllTrashEvent extends NoteEvents {}
 
 class DelEvent extends NoteEvents {
- NoteModel note;
+  NoteModel note;
   DelEvent({this.note});
 }

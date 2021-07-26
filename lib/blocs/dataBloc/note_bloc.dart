@@ -1,4 +1,3 @@
-
 import 'package:bloc_todo/data/data_model.dart';
 import 'package:bloc_todo/data/data_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,29 +9,31 @@ class NoteBloc extends Bloc<NoteEvents, NoteStates> {
   NoteBloc(NoteStates initialState, this.repo) : super(initialState);
 
   @override
-  Stream<NoteStates> mapEventToState(NoteEvents event) async*{
-    if(event is GetAllEvent) {
+  Stream<NoteStates> mapEventToState(NoteEvents event) async* {
+    if (event is GetAllEvent) {
       yield LoadingState();
       var notes = await repo.getNotes();
       yield GetState(notes: notes);
-
-    } if(event is GetAllTrashEvent) {
+    }
+    if (event is GetAllTrashEvent) {
       yield LoadingState();
       var notes = await repo.getTrashNotes();
       yield GetTrashState(notes: notes);
-
-    }
-    else if (event is AddEvent) {
-      await repo.addNote(NoteModel(title: event.title, description: event.description, id: event.id, trash: event.trash,url: event.url));
+    } else if (event is AddEvent) {
+      await repo.addNote(NoteModel(
+          title: event.title,
+          description: event.description,
+          id: event.id,
+          trash: event.trash,
+          url: event.url));
       yield LoadingState();
       var anotes = await repo.getNotes();
       yield AddState(anotes: anotes);
     } else if (event is DelEvent) {
       await repo.delNote(event.note);
       yield LoadingState();
-     var dnotes = await repo.getNotes();
+      var dnotes = await repo.getNotes();
       yield DelState(dnotes: dnotes);
     }
   }
-
 }

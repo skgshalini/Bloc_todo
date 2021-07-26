@@ -10,6 +10,7 @@ class AddState extends NoteStates {
   List<NoteModel> anotes;
   AddState({this.anotes});
 }
+
 class DelState extends NoteStates {
   List<NoteModel> dnotes;
   DelState({this.dnotes});
@@ -19,8 +20,8 @@ class GetState extends NoteStates {
   List<NoteModel> notes;
   GetState({this.notes});
 }
+
 class GetTrashState extends NoteStates {
   List<NoteModel> notes;
   GetTrashState({this.notes});
 }
-

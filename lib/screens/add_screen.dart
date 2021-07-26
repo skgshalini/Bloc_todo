@@ -1,12 +1,11 @@
 import 'package:bloc_todo/blocs/checkboxcubit/checkbox_cubit.dart';
 import 'package:bloc_todo/blocs/dataBloc/note_bloc.dart';
 import 'package:bloc_todo/blocs/dataBloc/note_event.dart';
-import 'package:bloc_todo/blocs/dataBloc/note_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'home_screen.dart';
+
 
 class Insert extends StatefulWidget {
   @override
@@ -17,15 +16,15 @@ class InsertState extends State<Insert> {
   final _formkey = GlobalKey<FormState>();
   var _title = '';
   var _description = '';
-  var _url="";
+  var _url = "";
   startauthentication() {
     final validity = _formkey.currentState.validate();
     FocusScope.of(context).unfocus();
 
     if (validity) {
       _formkey.currentState.save();
-      BlocProvider.of<NoteBloc>(context).add(
-          AddEvent(title: _title, description: _description, trash: false,url: _url));
+      BlocProvider.of<NoteBloc>(context).add(AddEvent(
+          title: _title, description: _description, trash: false, url: _url));
     }
   }
 
@@ -90,48 +89,54 @@ class InsertState extends State<Insert> {
                             ),
                           ),
                           SizedBox(height: 10),
-                        BlocBuilder<CheckboxCubit, bool>(builder: (context, val) {
-                         return Row(
-                           mainAxisAlignment: MainAxisAlignment.start,
-                           children:[
-                             Padding(
-                               padding: const EdgeInsets.only(left:16),
-                               child: Text("Add url",style: TextStyle(fontSize: 18),),
-                             ),
-                           Checkbox(
-
-                               value: val,
-                               onChanged: (value) {
-                                 context.read<CheckboxCubit>().navigate(value);
-                               }),
-                           ],
-                         );
-
-                        }),
+                          BlocBuilder<CheckboxCubit, bool>(
+                              builder: (context, val) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 16),
+                                  child: Text(
+                                    "Add url",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
+                                Checkbox(
+                                    value: val,
+                                    onChanged: (value) {
+                                      context
+                                          .read<CheckboxCubit>()
+                                          .navigate(value);
+                                    }),
+                              ],
+                            );
+                          }),
                           SizedBox(height: 10),
-                      BlocBuilder<CheckboxCubit, bool>(builder: (context, val) {
-                        return   Visibility(
-                               visible: val,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                key: ValueKey('url'),
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'This field can\'t be empty';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                  _url = value;
-                                },
-                                decoration: InputDecoration(
-                                  labelText: "Enter url",
+                          BlocBuilder<CheckboxCubit, bool>(
+                              builder: (context, val) {
+                            return Visibility(
+                              visible: val,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  key: ValueKey('url'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'This field can\'t be empty';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    _url = value;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "Enter url",
+                                  ),
                                 ),
                               ),
-                            ),
-                          );}),
+                            );
+                          }),
                           SizedBox(height: 10),
                           Container(
                               padding: EdgeInsets.all(5),
@@ -146,7 +151,6 @@ class InsertState extends State<Insert> {
                                     startauthentication();
                                   })),
                           SizedBox(height: 10),
-
                         ],
                       ),
                     ))

@@ -7,14 +7,13 @@ class TodoPopupCard extends StatelessWidget {
   const TodoPopupCard({Key key, this.note}) : super(key: key);
   final NoteModel note;
 
-
   @override
   Widget build(BuildContext context) {
     bool vis;
-    if(note.url==null||note.url.length==0)
-      vis=false;
-      else
-        vis=true;
+    if (note.url == null || note.url.length == 0)
+      vis = false;
+    else
+      vis = true;
     return Hero(
       tag: note.id,
       child: Padding(
@@ -51,15 +50,18 @@ class TodoPopupCard extends StatelessWidget {
                     height: 8,
                   ),
                   Visibility(
-                    visible: vis,
+                      visible: vis,
                       child: Row(
                         children: [
-                          Text("URL : ", style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            "URL : ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Flexible(
                             child: Text(
-                    note.url,
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                              note.url,
+                              style: TextStyle(color: Colors.blue),
+                            ),
                           ),
                         ],
                       )),
@@ -70,16 +72,15 @@ class TodoPopupCard extends StatelessWidget {
                       visible: vis,
                       child: Center(
                         child: ElevatedButton(
-                          onPressed:
-                            (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>  VideoPLayer(url:note.url),
-                                ),
-                              );
-
-                            },
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    VideoPLayer(url: note.url),
+                              ),
+                            );
+                          },
                           child: Text("Play"),
                         ),
                       )),
